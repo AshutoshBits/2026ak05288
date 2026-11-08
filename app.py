@@ -32,17 +32,7 @@ if uploaded_file is not None:
         st.error("Upload test_data.csv with all 64 pixel columns, the digit column, and test rows.")
         st.stop()
 
-     app_folder = Path(__file__).resolve().parent
-    filename = model_files[selected_model]
-
-    model_path = app_folder / "model" / filename
-    if not model_path.is_file():
-        model_path = app_folder / filename
-
-    if not model_path.is_file():
-        st.error(f"Missing model file: {filename}. Upload it to the model folder on GitHub.")
-        st.stop()
-
+       model_path = Path(__file__).resolve().parent / "model" / model_files[selected_model]
     model = joblib.load(model_path)
 
     X = data.loc[:, features]
